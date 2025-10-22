@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Niveles Quebradas - SIATA</title>
+  <style>
+    body {
+      background-color: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    h1 {
+      text-align: center;
+      font-size: 4em; /* Aumentado el tamaño del título */
+      margin: 15px 0 5px 0;
+      letter-spacing: 2px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      justify-items: center;
+      align-items: center;
+      height: calc(100vh - 100px);
+    }
+    img {
+      width: 95%;
+      height: auto;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <h1>Niveles de Quebradas - SIATA</h1>
+  <div class="grid" id="imageGrid"></div>
+
+  <script>
+    const groups = [
+      [
+        "https://siata.gov.co/hidrologia/nivel_new/3h/584_rmedellinestacionmetroayura.png",
+        "https://siata.gov.co/hidrologia/nivel_new/3h/687_rmedellinestacionmetroaguacatala.png",
+        "https://siata.gov.co/hidrologia/nivel_new/3h/678_rmedellinestacionmetroenvigado.png"
+      ],
+      [
+        "https://siata.gov.co/hidrologia/nivel_new/3h/91_rmedellinestacionmetrosabaneta.png",
+        "https://siata.gov.co/hidrologia/nivel_new/3h/423_qlaayuralosnaranjos.png",
+        "https://siata.gov.co/hidrologia/nivel_new/3h/236_qdonamariasantamaria2.png"
+      ],
+      [
+        "https://siata.gov.co/hidrologia/nivel_new/3h/677_qlajabalconaaguacatala.png"
+      ]
+    ];
+
+    const grid = document.getElementById("imageGrid");
+    let currentGroup = 0;
+
+    function showGroup() {
+      grid.innerHTML = "";
+      groups[currentGroup].forEach(url => {
+        const img = document.createElement("img");
+        img.src = url + "?t=" + new Date().getTime();
+        grid.appendChild(img);
+      });
+      currentGroup = (currentGroup + 1) % groups.length;
+    }
+
+    showGroup();
+    setInterval(showGroup, 10000); // cambia cada 10 segundos
+  </script>
+</body>
+</html>
